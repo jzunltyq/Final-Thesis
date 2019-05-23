@@ -1,0 +1,37 @@
+﻿@{  
+    Layout = "~/Views/Shared/_Layout.cshtml";  
+}  
+<div class="container">  
+    <div class="row">   
+        <div class="col-md-12">   
+            <script>  
+                //register call back once custom search result gets load  
+                (function () {      
+                    window.__gcse = {   
+                        callback: searchCallback   
+                    };  
+                    function searchCallback() {  
+                        $('#gsc-i-id1').focus();  
+                        $('#gsc-i-id1').val('@ViewBag.SearchString');  
+                        $(".gsc-search-button").trigger('click');  
+                    }   
+                    //var cx = 'xxxxxxxxxxxxxxxxxx:atjybvayeme';   
+                    //var gcse = document.createElement('script');   
+                    //gcse.type = 'text/javascript';gcse.async = true;   
+                    //gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//cse.google.com/cse.js?cx=' + cx;   
+                    //var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse, s); })();   
+
+                    var cx = '000444561497760690246:j6o8r-ulmmm';
+                    var gcse = document.createElement('script');
+                    gcse.type = 'text/javascript';
+                    gcse.async = true;
+                    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(gcse, s);
+
+            </script>   
+            <gcse:search>  
+            </gcse:search>   
+        </div>   
+    </div>  
+</div> 

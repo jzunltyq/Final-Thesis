@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Google.Apis.Customsearch.v1.Data.Result>
+@*@{
+        ViewBag.Title = "SearchPost";
+
+    }*@
+
+    @*<h2>SearchPost</h2>
+    <script>
+        (function() {
+            var cx = '000444561497760690246:j6o8r-ulmmm';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+    </script>
+    <gcse:search></gcse:search>*@
+
+
+@foreach (var item in Model)
+{
+    <span>@item.Title</span>
+}

@@ -1,0 +1,144 @@
+
+@{
+    ViewBag.Title = "Advanced search page (powered by EasyQuery)";
+}
+
+
+    <link href="http://cdn.korzh.com/eq/3.7.0/themes/default/easyquery.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="http://cdn.korzh.com/eq/3.7.0/themes/default/eqview.css" rel="stylesheet" type="text/css" />
+    <link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+
+        // Load the Visualization API and the piechart package.
+        google.load('visualization', '1.0', { 'packages': ['corechart'] });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(GoogleVisualizationLoaded);
+
+        function GoogleVisualizationLoaded() {
+            //alert("Visualization loaded!!!");
+        }
+
+        window.easyQuerySettings = {
+            serviceUrl: "/AdvancedSearch",
+            loadDefaultModel: true,
+            entitiesPanel: { 
+				showCheckboxes: true 
+			},
+            columnsPanel: { 
+				allowAggrColumns: true, 
+				attrElementFormat: "{entity} {attr}", 
+				showColumnCaptions: true, 
+				adjustEntitiesMenuHeight: false 
+			},
+            queryPanel: { 
+                showPoweredBy: false,
+				alwaysShowButtonsInPredicates: false,
+				dateFormatValue: "mm/dd/yyyy",
+				dateFormatDisplay: "d MM yyyy"
+			},
+            syncQueryOptions: {
+                sqlOptions: {
+					SelectDistinct:false
+				}
+            },
+
+            listRequesHandler: function (params, onResult) {
+                var processed = true;
+                if (params.listName == "ListName") {
+                    var query = EQ.client.getQuery();
+					onResult([
+						{ id: "ID1", text: "Item 1" },
+						{ id: "ID2", text: "Item 2" },
+						{ id: "ID3", text: "Item 3" },
+						{ id: "ID4", text: "Item 4" }
+                        ]);
+                }
+                else
+                    processed = false;
+
+                return processed;
+
+            }
+
+        };
+		
+	</script>
+
+
+<div id="main">
+    <div id="easyquery-content">
+        <div class="header-panel">
+            <div class="entities-block">
+                <hr class="entities-hr hr" />
+                <div class="entities-title">Entities</div>
+                <div class="entities-panel-container">
+                    <!-- EntitiesPanel widget placeholder -->
+					<div id="EntitiesPanel" onselectstart="return false"></div>
+				</div>
+            </div>
+
+            <div class="central-block">
+                <div class="columns-block">
+                    <hr class="columns-hr hr" />
+                    <div class="columns-title">Columns</div>
+                    <div class="columns-panel-container">
+                        <!-- ColumnsPanel widget placeholder -->
+                        <div id="ColumnsPanel"></div>
+                    </div>
+                </div>
+                <div class="conditions-block">
+                    <hr class="conditions-hr hr" />
+                    <div class="conditions-title">Conditions</div>
+                    <div class="query-panel-container">
+                        <!-- QueryPanel widget placeholder -->
+                        <div id="QueryPanel"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="menu-block">
+                <hr class="menu-hr hr" />
+                <div class="menu-title">Menu</div>
+                <div class="menu-content">
+                    <div id="ClearQueryButton" class="eqv-button clear-button">Clear query</div>
+                    <div id="LoadQueryButton" class="eqv-button load-query-button">Load query</div>
+                    <div id="SaveQueryButton" class="eqv-button save-query-button">Save query</div>
+                    <div id="ExecuteQueryButton" class="eqv-button execute-button">Execute</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-panel">
+            <div class="sql-panel">
+                <hr class="sql-panel-hr hr" />
+                <div class="sql-panel-title">SQL</div>
+                <div id="SqlPanel" class="sql-block">
+                    <div class="sql-panel-result"></div>
+                </div>
+            </div>
+            <div class="result-panel">
+                <hr class="result-panel-hr hr" />
+                <div class="result-panel-title">Result 
+                    <span id="ResultExportButtons"  >
+                         <a href="@Url.Action("ExportToFileExcel","AdvancedSearch")">Export to Excel</a>   
+                         <a href="@Url.Action("ExportToFileCsv","AdvancedSearch")">Export to CSV</a>
+                    </span>
+                </div>
+                <div id="ResultPanel" class="result-panel-content">
+                </div>
+                <div class="result-panel-content-padding">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+<script src="http://cdn.korzh.com/eq/3.7.0/eq.all.min.js" type="text/javascript"></script>
+<script src="http://cdn.korzh.com/eq/3.7.0/eq.view.basic.js" type="text/javascript"></script>
+}

@@ -1,0 +1,22 @@
+﻿@model  List<Recommended_System.Models.Results>
+<br />
+@*@{ Html.RenderPartial("SearchItemsName");}*@
+
+<form action="@Url.Action("InternetSearch")" method="post">
+    <input id="input" name="InternetSearch" class="form-control field" placeholder="Internet Search...">
+    <input type="button" class="btn btn-primary center-block btnCmp" style="margin-top: 0% !important;padding:14px !important;" value="search">
+</form>
+<h2>ShowResults</h2>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li style="width: 500px">
+            <a href="@item.Link" style="color:blue">@item.Title</a><br />
+            <span style="font-size: 15px;color:green">@item.Link</span><br />
+            <span style="color:gray">@item.Snippet</span><br />
+
+
+        </li>
+    }
+</ul>
